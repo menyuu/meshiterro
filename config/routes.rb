@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :users, only: [:show, :edit, :update]
-  resources :post_images, only: [:new, :index, :show, :create, :destroy]
+  resources :post_images, only: [:new, :index, :show, :create, :destroy] do
+    resources :post_comments, only: [:create, :destroy]
+  end
 
   get "homes/about", as: "about"
   root to: "homes#top"
